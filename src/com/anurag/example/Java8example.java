@@ -124,43 +124,26 @@ public class Java8example {
 		System.out.println("AverageSalary : " + collect10.getAverage());
 		System.out.println("Total salary : " + collect10.getSum());
 
-		// Separate the employee who are younger or equal to 25 from those employee who are older than 25
+		// Separate the employee who are younger or equal to 25 from those employee who
+		// are older than 25
 		Map<Boolean, List<Employee>> collect11 = employeeList.stream()
-				.collect(Collectors.partitioningBy(e -> e.getAge() >25));
+				.collect(Collectors.partitioningBy(e -> e.getAge() > 25));
 		System.out.println("Employee younger than 25 : " + collect11.size());
 
-		//who is the oldest employee in the organization? what is is age and which
+		// who is the oldest employee in the organization? what is is age and which
 		// department he belongs to.
 		Optional<Employee> max = employeeList.stream().max(Comparator.comparingDouble(Employee::getAge));
 		System.out.println("Max : " + max.get().getName());
-		
-		//Group all employee who has same age
-		
-	Map<Integer, List<Employee>> collect12 = employeeList.stream().collect(Collectors.groupingBy(Employee::getAge));
-	System.out.println("--> " + collect12);
-	
-	// Group all employee name who has same age
-	Map<Integer, List<String>> collectAllSameName = employeeList.stream().collect(Collectors.groupingBy(f->f.getAge(),Collectors.mapping(Employee:: getName, Collectors.toList())));
-	System.out.println("All employee name who has same age " + collectAllSameName);
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+		// Group all employee who has same age
+
+		Map<Integer, List<Employee>> collect12 = employeeList.stream().collect(Collectors.groupingBy(Employee::getAge));
+		System.out.println("All employee who has same age--> " + collect12);
+
+		// Group all employee name who has same age
+		Map<Integer, List<String>> collectAllSameName = employeeList.stream().collect(
+				Collectors.groupingBy(f -> f.getAge(), Collectors.mapping(Employee::getName, Collectors.toList())));
+		System.out.println("All employee name who has same age " + collectAllSameName);
+
 	}
 }
