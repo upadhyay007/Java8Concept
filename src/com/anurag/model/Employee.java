@@ -20,6 +20,12 @@ public Employee(int id, String name, int age, String gender, String department, 
 	this.salary = salary;
 }
 
+public Employee(int id, String string, int age) {
+	this.id = id;
+	this.name = string;
+	this.age = age;
+}
+
 public int getId() {
 	return id;
 }

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.anurag.model.Emp;
+import com.anurag.model.Employee;
 
 public class Java8Stream {
 	@SuppressWarnings("deprecation")
@@ -69,6 +70,18 @@ public class Java8Stream {
 		//Find the top 3 most salaried employees using Stream API
 		List<Emp> collect7 = emp.stream().sorted(Comparator.comparing(Emp::getSalary).reversed()).limit(3).collect(Collectors.toList());
 		System.out.println("Top # slries person :  " + collect7);
+		
+		
+		Employee emp1 = new Employee(1,"Ajay",100);
+        Employee emp2 = new Employee(2,"name",100);
+        Employee emp3 = new Employee(3,"Ajay",100);
+        Employee emp4 = new Employee(4,"name",100);
+        Employee emp5 = new Employee(5,"Ajay",100);
+		
+        List<Employee> asListNew = Arrays.asList(emp1,emp2,emp3,emp4,emp5);
+        System.out.println("--> " + asListNew);
+        Map<String, Long> frequency = asListNew.stream().collect(Collectors.groupingBy(Employee::getName,Collectors.counting()));
+        System.out.println("Frequency Of Name : " + frequency);
 		
 	}
 }
