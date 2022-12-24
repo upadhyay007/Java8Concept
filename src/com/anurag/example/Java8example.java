@@ -60,6 +60,10 @@ public class Java8example {
 		Map<String, Long> collect2 = employeeList.stream()
 				.collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
 		System.out.println(collect2);
+		
+		//How many male and female employee are there in organization.
+		 Map<String, List<String>> maleFemaleName = employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.mapping(Employee::getName, Collectors.toList())));
+		 System.out.println("Male and Female employee name "   + maleFemaleName);
 
 		// Print All the name of the department of organization.
 		List<String> listOfDepartmentName = employeeList.stream().map(a -> a.getDepartment())
@@ -91,13 +95,17 @@ public class Java8example {
 				Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)));
 		System.out.println("AvarageSalary :  " + collect6);
 
-		// Get the details of youngest male employee in the product development
-		// department.
+		// Get the details of youngest male employee in the product development department.
 		Optional<Employee> min = employeeList.stream()
 				.filter(f -> f.getDepartment().equals("Product Development") && f.getGender().equals("Male"))
 				.min(Comparator.comparingInt(Employee::getAge));
 		System.out.println("Youngest male in product development : " + min.get().getName());
 
+		Optional<Employee> minOtherways = employeeList.stream()
+				.filter(f -> f.getDepartment().equals("Product Development") && f.getGender().equals("Male"))
+				.collect(Collectors.minBy(Comparator.comparingInt(Employee::getAge)));
+		System.out.println("Youngest male in product development minOtherways  : " + minOtherways.get().getName());
+		
 		// who has the most working experiences in the orgination
 		Optional<Employee> findFirst = employeeList.stream().sorted(Comparator.comparingInt(Employee::getYearOfJoining))
 				.findFirst();
@@ -139,6 +147,10 @@ public class Java8example {
 
 		Map<Integer, List<Employee>> collect12 = employeeList.stream().collect(Collectors.groupingBy(Employee::getAge));
 		System.out.println("All employee who has same age--> " + collect12);
+		
+
+		 Map<Integer, Long> collect14 = employeeList.stream().collect(Collectors.groupingBy(Employee::getAge, Collectors.counting()));
+		System.out.println("All employee who has same age--> " + collect14);
 
 		// Group all employee name who has same age
 		Map<Integer, List<String>> collectAllSameName = employeeList.stream().collect(
