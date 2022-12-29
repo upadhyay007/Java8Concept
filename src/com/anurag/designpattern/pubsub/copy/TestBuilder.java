@@ -1,4 +1,4 @@
-package com.anurag.designpattern.pubsub;
+package com.anurag.designpattern.pubsub.copy;
 
 import com.anurag.designpattern.builder.Student;
 
