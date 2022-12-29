@@ -8,18 +8,20 @@ public class MessagePublisher implements Subject {
 	private List<Oberver> observers = new ArrayList<>();
 	
 	@Override
-	public void suscribe(Oberver oberver) {
+	public void subscribe(Oberver oberver) {
 		observers.add(oberver);
 	}
 
 	@Override
-	public void unsuscribe(Oberver oberver) {
+	public void unSubscribe(Oberver oberver) {
 		observers.remove(oberver);
 	}
 
 	@Override
-	public void notify(Message message) {
-		// TODO Auto-generated method stub
+	public void notifyUpdate(Message message) {
+		for (Oberver oberver : observers) {
+			oberver.update(message);
+		}
 
 	}
 
