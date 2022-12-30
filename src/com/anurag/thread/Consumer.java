@@ -16,6 +16,7 @@ public class Consumer implements Runnable {
 			synchronized (queue) {
 				while (queue.size() == 0) {
 					try {
+						System.out.println("Thread Name -->  " + Thread.currentThread().getName());
 						queue.wait();
 						Thread.currentThread().sleep(1000);
 												

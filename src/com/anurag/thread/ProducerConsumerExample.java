@@ -12,8 +12,8 @@ public class ProducerConsumerExample {
 		Thread producer = new Thread(new Producer(queue));
 		
 		//Consumer
-		Thread consumer = new Thread(new Consumer(queue));
-		Thread consumer1 = new Thread(new Consumer1(queue));
+		Thread consumer = new Thread(new Consumer(queue), "Consumer Thread 1");
+		Thread consumer1 = new Thread(new Consumer1(queue), "Consumer Thread 2");
 		
 		producer.start();
 		consumer.start();
