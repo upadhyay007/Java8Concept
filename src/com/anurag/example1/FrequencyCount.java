@@ -21,9 +21,9 @@ public class FrequencyCount {
 		
 		System.out.println("Frequency list of each occurence  -> " + list);
 		System.out.println("Frequency count of each occurence -> " + collect);
-		System.out.println("Frequency other ways to count     -> " + collect);
+		System.out.println("Frequency other ways to count     -> " + otherWaysToCountFrequency);
 
 		System.out.println("Frequency list of each occurence other ways -> " + listof);	
 	 
-	}
+	} 
 }
