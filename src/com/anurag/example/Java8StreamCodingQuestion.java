@@ -4,12 +4,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Java8StreamCodingQuestion {
 	public static void main(String[] args) {
-		List<Integer> asList = Arrays.asList(1, 17, 78, 29, 5, 2, 36, 24, 28, 89, 98);
+		List<Integer> asList = Arrays.asList(1, 17, 78, 29, 5, 2, 36, 24, 29, 89, 98);
 
 		// Given a list of numbers, return the sum of all numbers
 		Optional<Integer> sumReduce = asList.stream().reduce((a, b) -> a + b);
@@ -30,7 +32,12 @@ public class Java8StreamCodingQuestion {
 		System.out.println("Number start with 2 in list : " + collect);
 
 		// Given a list of number find the duplicate
+		System.out.println("Given a list of number find the duplicate");
 		asList.stream().filter(f -> Collections.frequency(asList, f) > 1).forEach(System.out::print);
+		System.out.println("Given a list of number find the duplicate");
+		Map<Integer, Long> collect3 = asList.stream().collect(Collectors.groupingBy(f->f,Collectors.counting()));
+		List<Integer> collect4 = collect3.entrySet().stream().filter(f->f.getValue()>1).map(Entry::getKey).collect(Collectors.toList());
+		System.out.println("Collect 4 :" + collect4);
 		//To print distinct
 		asList.stream().distinct().forEach(System.out::println);
 		

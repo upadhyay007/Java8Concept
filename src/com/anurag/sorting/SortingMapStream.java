@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 public class SortingMapStream {
 
 	public static void main(String[] args) {
+		
 		Map<String, String> map = new HashMap<String, String>();
+		
 		map.put("India", "Delhi");
 		map.put("Usa", "Washington");
 		map.put("China", "Beging");

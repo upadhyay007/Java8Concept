@@ -87,7 +87,9 @@ public class Java8example {
 		Optional<Employee> collect3 = employeeList.stream()
 				.collect(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary)));
 		System.out.println("Get higest salary dertails : " + collect3.get().getName());
-
+		
+		Map<String, Optional<Employee>> higestSalary = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
+		System.out.println("Get higest salary dertails : " + higestSalary);
 		// 7. Get name of all the empoyee who has joined after 2015.
 		List<String> collect4 = employeeList.stream().filter(f -> f.getYearOfJoining() > 2015).map(Employee::getName)
 				.collect(Collectors.toList());

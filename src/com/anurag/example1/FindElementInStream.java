@@ -17,6 +17,7 @@ public class FindElementInStream {
 
 		// Sorted List
 		ArrayList<Integer> arrayList = new ArrayList<>(Arrays.asList(5, 9, 11, 2, 8, 21, 1));
+		
 		List<Integer> sortedList = arrayList.stream().sorted().collect(Collectors.toList());
 		System.out.println("Find Sorted List : " + sortedList);
 		

@@ -1,8 +1,11 @@
 package com.anurag.example;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,7 +32,10 @@ public class Java8StreamCodingQuestion1 {
 		List<String> list = Arrays.asList("aabc", "aab", "aabwc", "aabc", "aabwcwer", "aabcsd");
 		List<String> collect2 = list.stream().filter(f -> f.length() > 6).collect(Collectors.toList());
 		System.out.println(" more than 6 digit " + collect2);
-
+		
+		
+		 
+		 
 		// How to collect 2 stream
 		List<Integer> list1 = Arrays.asList(1, 4, 6, 7);
 		List<Integer> list2 = Arrays.asList(11, 24, 86, 97);
@@ -46,12 +52,14 @@ public class Java8StreamCodingQuestion1 {
 		IntStream.range(1, 11).filter(f -> f % 2 == 0).forEach(System.out::println);
 		
 		
-		//Find the duplicate element from the list using java 8
+		// Find the duplicate element from the list using java 8
 		List<Integer> findDuplicate = Arrays.asList(1, 2, 7, 20, 5, 2, 7, 24, 22, 14, 21);
-		Set<Integer> set = new HashSet();
-		List<Integer> duplicate = findDuplicate.stream().filter(i->!set.add(i)).collect(Collectors.toList());//.forEach(System.out::prinln);
+		Set<Integer> set = new HashSet<Integer>();
+		List<Integer> duplicate = findDuplicate.stream().filter(i -> !set.add(i)).collect(Collectors.toList());// .forEach(System.out::prinln);
 		System.out.println("Duplicate list : " + duplicate);
+
 		
-		
+		 
+
 	}
 }

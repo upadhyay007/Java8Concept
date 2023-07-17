@@ -32,8 +32,9 @@ public class Java8TypeOfStream {
 		//maptoInt()
 		//mapToLong()
 		//mapToDouble()
+		System.out.println("new ");
 		Stream.of("a1","a2","a3").map(s->s.substring(1)).mapToInt(Integer::parseInt).max().ifPresent(System.out::println);
-		
+		System.out.println("new ");
 		
 		//Primitive can be transformed to objects streams via mapToObj()
 		IntStream.range(1, 4).mapToObj(i->"a"+i).forEach(System.out::println);  // out put -> a1,a2,a3

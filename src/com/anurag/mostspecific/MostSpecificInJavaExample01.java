@@ -3,7 +3,8 @@ package com.anurag.mostspecific;
 public class MostSpecificInJavaExample01 {
 
 	public static void main(String[] args) {
-//		show('1');
+        // show('1');
+		// show("hello");
 		// show('h');
 		// show(10);
 		 show(null);
@@ -14,7 +15,7 @@ public class MostSpecificInJavaExample01 {
 //	}
 
 	public static void show(char ch) {
-		System.out.println("Object Type Parameter");
+		System.out.println("char Type Parameter");
 	}
 
 	public static void show(Object object) {
