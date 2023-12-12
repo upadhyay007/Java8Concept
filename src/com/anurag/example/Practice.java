@@ -6,17 +6,23 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.DoubleSummaryStatistics;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.anurag.model.Emp;
 import com.anurag.model.Employee;
 
 public class Practice {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		List<Employee> employeeList = new ArrayList<Employee>();
 		employeeList.add(new Employee(111, "Jiya Brein", 32, "Female", "HR", 2011, 25000.0));
@@ -36,9 +42,10 @@ public class Practice {
 		employeeList.add(new Employee(255, "Ali Baig", 23, "Male", "Infrastructure", 2018, 12700.0));
 		employeeList.add(new Employee(266, "Sanvi Pandey", 26, "Female", "Product Development", 2015, 28900.0));
 		employeeList.add(new Employee(277, "Anuj Chettiar", 31, "Male", "Product Development", 2012, 35700.0));
-		
+
 		// 1.Print the higest paid employee in each department
-		Map<String,Optional<Employee>> collect = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
+		Map<String, Optional<Employee>> collect = employeeList.stream().collect(Collectors.groupingBy(
+				Employee::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
 		System.out.println("Higest Paid Employee in Each Department : " + collect);
 
 		// 2.How many male and female employee are there in organization.
@@ -231,6 +238,92 @@ public class Practice {
 
 		System.out.println("Top Salary : " + Top3Salary);
 
+		List<Integer> listValue = Arrays.asList(1, 17, 78, 29, 5, 2, 36, 24, 29, 89, 98);
+
+		// Given a list of numbers, return the sum of all numbers
+
+		Optional<Integer> reduce = listValue.stream().reduce((a, b) -> a + b);
+		System.out.println("Reduce Example : " + reduce.get());
+
+		// Given a list of numbers, return the average of all numbers
+		OptionalDouble average = listValue.stream().mapToInt(f -> f).average();
+		System.out.println(" Average of List value  : " + average);
+
+		// Given a list of numbers, square them and filter the number which are greater
+		// 100 and then find the average of them.
+
+		List<Integer> SquareAndFilter = listValue.stream().map(f -> f * f).filter(f -> f > 100)
+				.collect(Collectors.toList());
+
+		System.out.println(" SquareAndFilter : " + SquareAndFilter);
+
+		// Given a list of numbers, find out all the numbers starting with 2
+
+		List<String> NoStartWith2 = listValue.stream().map(f -> f + "").filter(f -> f.startsWith("2"))
+				.collect(Collectors.toList());
+		System.out.println("NoStartWith2 : " + NoStartWith2);
+
+		// Given a list of number find the duplicate
+		List<Integer> finding = listValue.stream().collect(Collectors.groupingBy(f -> f, Collectors.counting()))
+				.entrySet().stream().filter(f -> f.getValue() > 1).map(Entry::getKey).collect(Collectors.toList());
+
+		System.out.println("finding : " + finding);
+
+		// Given a list of numbers, print the maximum and minimum values
+
+		Integer maxValue = listValue.stream().max(Comparator.comparing(Integer::valueOf)).get();
+		System.out.println("Max Integer Value : " + maxValue);
+		Integer MinValue = listValue.stream().min(Comparator.comparing(Integer::valueOf)).get();
+		System.out.println("Value : " + MinValue);
+
+		// Given list of number, sort them in ASC and DESC order and print
+		listValue.stream().sorted(Comparator.reverseOrder()).forEach(System.out::print);
+
+		// Given list of numbers, return the first 5 element and sum.
+		// Approach we can use limit()followed by reduce()
+		Optional<Integer> reduceAndLimit = listValue.stream().limit(5).reduce((a, b) -> a + b);
+		System.out.println("reduceAndLimit : " + reduceAndLimit.get());
+		
+		// Given a list of numbers. skip the first 5 numbers and return the sum of remaining numbers
+		Optional<Integer> skipAndLimit = listValue.stream().skip(5).reduce((a,b)->a+b);
+		System.out.println("skipAndLimit : " + skipAndLimit.get());
+		
+		// WAP to get sum of all number in list
+		int sum = listValue.stream().mapToInt(f->f).sum();
+		System.out.println("Sum of all number in list");
+		
+		// WAP to square the number of list and filter out the number greater than 10
+		List<Integer> list2 = listValue.stream().map(f->f*f).filter(f->f>10).collect(Collectors.toList());
+		System.out.println("List view : "+ list2);
+		
+		// Find the list of string greater than 6 character
+		List<String> list1 = Arrays.asList("aabc", "aab", "aabwc", "aabc", "aabwcwer", "aabcsd");
+		List<String> listOfString = list1.stream().filter(f->f.length()>=6).collect(Collectors.toList());
+		System.out.println("List of String : "+ listOfString);
+		
+		// How to collect 2 stream
+		
+		List<Integer> intList1 = Arrays.asList(1, 4, 6, 7);
+		List<Integer> intList2 = Arrays.asList(11, 24, 86, 97);
+		Stream<Integer> concat = Stream.concat(intList1.stream(), intList2.stream());
+		System.out.println("Concat Stream : ");
+		concat.forEach(System.out::print);
+		
+		// How to remove duplicate element
+		List<Integer> asListOfInteger = Arrays.asList(1, 2, 7, 20, 5, 2, 7, 24, 22, 14, 21);
+		List<Integer> listwithoutDuplicate = asListOfInteger.stream().distinct().collect(Collectors.toList());
+		System.out.println("listwithoutDuplicate " + listwithoutDuplicate);
+		
+		
+		// Find all the even number exist in List
+		asListOfInteger.stream().filter(f->f%2==0).collect(Collectors.toList());
+		
+		// Find the duplicate element from the list using java 8
+		List<Integer> findDuplicate = Arrays.asList(1, 2, 7, 20, 5, 2, 7, 24, 22, 14, 21);
+		HashSet<Integer> hashSet = new HashSet<>();
+		List<Integer> duplicateList = findDuplicate.stream().filter(f-> !hashSet.add(f)).collect(Collectors.toList());
+		System.out.println("duplicateList : "+ duplicateList);
+		
 	}
 
 }
