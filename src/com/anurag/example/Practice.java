@@ -322,7 +322,7 @@ public class Practice {
 		List<Integer> findDuplicate = Arrays.asList(1, 2, 7, 20, 5, 2, 7, 24, 22, 14, 21);
 		HashSet<Integer> hashSet = new HashSet<>();
 		List<Integer> duplicateList = findDuplicate.stream().filter(f-> !hashSet.add(f)).collect(Collectors.toList());
-		System.out.println("duplicateList : "+ duplicateList);
+		System.out.println("duplicateList : "+ duplicateList); 
 		
 	}
 
