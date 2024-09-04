@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalLong;
 import java.util.stream.Collectors;
 
 import com.anurag.model.Emp;
@@ -17,6 +19,10 @@ public class Java8Stream {
 	public static void main(String[] args) {
 		ArrayList<Integer> arrayList = new ArrayList<Integer>(Arrays.asList(12, 24, 45, 67, 88, 99, 48));
 
+		OptionalLong max = arrayList.stream().mapToLong(f->f).max();
+		
+		System.out.println("Max : "+max.getAsLong());
+		
 		// Find the distinct number from arrays that is greater than 20 using stream API
 		List<Integer> collect = arrayList.stream().distinct().filter(n -> n > 20).collect(Collectors.toList());
 		System.out.println("Distinct No greater than 20 in array : " + collect);
@@ -32,6 +38,10 @@ public class Java8Stream {
 		ArrayList<Integer> intArr = new ArrayList<Integer>(Arrays.asList(12, 24, 45, 67, 88, 99, 48));
 		Integer nth = intArr.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList()).get(2 - 1);
 		System.out.println("nth Largest : " + nth);
+		
+		Integer integer = intArr.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()).get(0);
+		System.out.println("Integer :: "  + integer);
+		
 
 		// Find the word which start with a "T" from a given string using stream API
 		String sentance = "Hi guys welcome to the Teams";
@@ -69,8 +79,7 @@ public class Java8Stream {
 		
 		//Find the top 3 most salaried employees using Stream API
 		List<Emp> collect7 = emp.stream().sorted(Comparator.comparing(Emp::getSalary).reversed()).limit(3).collect(Collectors.toList());
-		System.out.println("Top # slries person :  " + collect7);
-		
+		System.out.println("Top # slries person :  " + collect7); 
 		
 		Employee emp1 = new Employee(1,"Ajay",100);
         Employee emp2 = new Employee(2,"name",100);
@@ -82,6 +91,14 @@ public class Java8Stream {
         System.out.println("--> " + asListNew);
         Map<String, Long> frequency = asListNew.stream().collect(Collectors.groupingBy(Employee::getName,Collectors.counting()));
         System.out.println("Frequency Of Name : " + frequency);
+        
+        List<Integer> asList =Arrays.asList(70,80,90,100,70,80,20);
+
+     // remove duplicate
+     // 2nd higest using java 8
+
+
+     Optional<Integer> value = asList.stream().distinct().sorted(Comparator.reverseOrder()).skip(1).findFirst();
 		
 	}
 }

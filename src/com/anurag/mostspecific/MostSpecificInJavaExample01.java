@@ -7,7 +7,7 @@ public class MostSpecificInJavaExample01 {
 		// show("hello");
 		// show('h');
 		// show(10);
-		 show(null);
+		// show(null);
 	}
 
 //	public static void show(String str) {

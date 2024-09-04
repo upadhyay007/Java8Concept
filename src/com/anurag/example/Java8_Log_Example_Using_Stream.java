@@ -2,6 +2,7 @@ package com.anurag.example;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,6 +36,16 @@ public class Java8_Log_Example_Using_Stream {
 		 .collect(Collectors.toList()).get(0).getKey();
 
  System.out.println("Most log producing server : "+ key);
+ 
+ 
+ Map<String,Long> map = asList.stream().map(f->f.split("#")[0]).collect(Collectors.groupingBy(f->f,Collectors.counting()));
+ String entry = map.entrySet().stream().sorted(Entry.comparingByValue(Comparator.reverseOrder())).collect(Collectors.toList()).get(0).getKey();
+ System.out.println("entry : "  + entry);
+ 
+ 
+ String s = "Anurag Upadhyay@79810";// --> "Anurag Upadhyay";
+  List<String> collect2 = Arrays.stream(s.split(" ")).map(f->f.split("@")[0]).collect(Collectors.toList());
+ System.out.println("collect2 : " + collect2);
  
 	}
 }

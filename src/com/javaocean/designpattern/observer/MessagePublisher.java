@@ -1,4 +1,4 @@
-package com.anurag.designpattern.pubsub;
+package com.javaocean.designpattern.observer;
 
 import java.util.ArrayList;
 import java.util.List;

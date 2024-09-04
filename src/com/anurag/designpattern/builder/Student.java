@@ -3,11 +3,11 @@ package com.anurag.designpattern.builder;
  * Outer Class
  */
 public class Student {
-	private String name;
-	private String city;
-	private int age;
-	private int mobile;
-	private String county;
+	private String name; 
+	private String city;    
+	private int age;        // Optional Parameter
+	private int mobile;	    // Optional Parameter
+	private String county;  // Optional Parameter
 
 	/**
 	 * Private Constructor

@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,8 @@ public class Java8StreamCodingQuestion {
 		List<Integer> asList = Arrays.asList(1, 17, 78, 29, 5, 2, 36, 24, 29, 89, 98);
 
 		// Given a list of numbers, return the sum of all numbers
+		int sum2 = asList.stream().mapToInt(f->f).sum();
+		System.out.println("sum of all integer : " + sum2);
 		Optional<Integer> sumReduce = asList.stream().reduce((a, b) -> a + b);
 		System.out.println("Sum is : " + sumReduce.get());
 
@@ -63,8 +66,11 @@ public class Java8StreamCodingQuestion {
 		System.out.println(" Sum : "+ sum);
 		
 		
-		
-		
+		List<String> fruitList = Arrays.asList(null,"apple","apple", "banana", "orange", "apple", "papaya");
+		Map<String, Long> countMap = fruitList.stream().filter(Objects::nonNull)
+				.filter(f->f.startsWith("o") ||  f.startsWith("a"))
+				.collect(Collectors.groupingBy(f->f,Collectors.counting()));
+		System.out.println("CountMap : " + countMap);
 
 	}
 }

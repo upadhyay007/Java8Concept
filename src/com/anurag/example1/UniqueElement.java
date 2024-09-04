@@ -15,7 +15,6 @@ public class UniqueElement {
 		List<String> uniqueElements = Arrays.stream(stringWithoutSpace.split(""))
 				.collect(Collectors.groupingBy(c -> c, Collectors.counting())).entrySet().stream()
 				.filter(f -> f.getValue() == 1).map(Map.Entry::getKey).collect(Collectors.toList());
-
-		System.out.println("Duplicat Element : " + uniqueElements);
+		 
 	}
 }

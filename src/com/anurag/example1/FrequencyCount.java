@@ -3,9 +3,12 @@ package com.anurag.example1;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -38,13 +41,15 @@ public class FrequencyCount {
 				.entrySet().stream().sorted(Collections.reverseOrder(Entry.comparingByValue())).findFirst().get()
 				.getKey();
 		System.out.println(key);
-
+		
+		
 		// find the world that has higest length
 		List<String> sentance = Arrays.asList("aabc", "aab", "aabwc", "aabc", "aabwcwer", "aabcsd");
 		// 1St Ways using max()
 		String higestLength = sentance.stream().max(Comparator.comparingInt(String::length)).get();
 		System.out.println("higestLength :  " + higestLength);
-
+		Optional<Integer> max = sentance.stream().map(String::length).max(Integer::compare);
+		System.out.println("max : "+  max);
 		// 2nd Ways using max()--length size
 		Integer higestLength1 = sentance.stream().map(String::length).max(Integer::compare).get();
 		System.out.println("higestLength :  " + higestLength1);

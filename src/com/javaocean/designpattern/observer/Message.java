@@ -1,4 +1,4 @@
-package com.anurag.designpattern.pubsub;
+package com.javaocean.designpattern.observer;
 
 public class Message {
 	final String messageContent;
