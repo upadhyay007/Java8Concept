@@ -1,4 +1,4 @@
-package com.anurag.designpattern.pubsub;
+package com.javaocean.designpattern.observer;
 
 public interface Subject {
 	void subscribe(Oberver oberver);

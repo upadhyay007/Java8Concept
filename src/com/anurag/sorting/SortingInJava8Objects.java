@@ -3,7 +3,11 @@ package com.anurag.sorting;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.anurag.model.Person;
 
@@ -75,7 +79,22 @@ public class SortingInJava8Objects {
 		
 
 		
+		HashMap<String, Integer> hashMap = new HashMap<>();
+		hashMap.put("java", 14);
+		hashMap.put("python", 1);
+		hashMap.put("csharp", 77);
+		hashMap.put("javascript", 1);
+		hashMap.put("angular", 2);
 		
+		  Map<Integer, List<String>> collect2 = hashMap.entrySet().stream()
+		.collect(Collectors
+				.groupingBy(Map.Entry::getValue,Collectors.mapping(Map.Entry::getKey, Collectors.toList())));
+ System.out.println(" collect2 "+ collect2);
+		
+		
+		
+		List<Entry<String,Integer>> collect = hashMap.entrySet().stream().sorted(Entry.comparingByValue()).collect(Collectors.toList());
+		System.out.println(collect);
 		
 		
 	}

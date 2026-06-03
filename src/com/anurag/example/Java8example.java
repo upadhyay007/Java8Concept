@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.anurag.model.Employee;
 
@@ -77,6 +78,7 @@ public class Java8example {
 		List<String> listOfDepartmentName = employeeList.stream().map(a -> a.getDepartment())
 				.collect(Collectors.toList());
 		System.out.println("list Of Department Name" + listOfDepartmentName);
+		
 
 		// 5. What is the avg age of male and female employee in organization.
 		Map<String, Double> avgOfMaleAndFemale = employeeList.stream()
@@ -87,6 +89,9 @@ public class Java8example {
 		Optional<Employee> collect3 = employeeList.stream()
 				.collect(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary)));
 		System.out.println("Get higest salary dertails : " + collect3.get().getName());
+		
+		Employee employee = employeeList.stream().max(Comparator.comparingDouble(Employee::getSalary)).get();
+		System.out.println("highestPaidEmployee : "+ employee);
 		
 		Map<String, Optional<Employee>> higestSalary = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
 		System.out.println("Get higest salary dertails : " + higestSalary);
@@ -136,6 +141,10 @@ public class Java8example {
 		Map<String, List<Employee>> collect9 = employeeList.stream()
 				.collect(Collectors.groupingBy(Employee::getDepartment));
 		System.out.println("All employee of each department : " + collect9);
+		
+		Map<String,List<String>> collectList = employeeList.stream()
+		.collect(Collectors.groupingBy(Employee::getDepartment,Collectors.mapping(Employee::getName, Collectors.toList())));
+		System.out.println("All employee of each department : " + collectList);
 
 		// 15. what is average salary and total salary of whole organization.
 		DoubleSummaryStatistics collect10 = employeeList.stream()
@@ -153,6 +162,9 @@ public class Java8example {
 		// department he belongs to.
 		Optional<Employee> max = employeeList.stream().max(Comparator.comparingDouble(Employee::getAge));
 		System.out.println("Max : " + max.get().getName());
+		
+		Optional<Employee> findFirst2 = employeeList.stream().sorted(Comparator.comparingDouble(Employee::getAge).reversed()).findFirst();
+		System.out.println("findFirst2"+ findFirst2);
 
 		// 18. Group all employee who has same age
 		Map<Integer, List<Employee>> collect12 = employeeList.stream().collect(Collectors.groupingBy(Employee::getAge));
@@ -161,6 +173,10 @@ public class Java8example {
 		Map<Integer, Long> collect14 = employeeList.stream()
 				.collect(Collectors.groupingBy(Employee::getAge, Collectors.counting()));
 		System.out.println("All employee who has same age--> " + collect14);
+		
+		 Map<Integer, List<Employee>> collect13 = employeeList.stream()
+				.collect(Collectors.groupingBy(Employee::getAge, Collectors.toList()));
+		System.out.println("!!All employee who has same age--> " + collect13);
 
 		// 19. Group all employee name who has same age
 		Map<Integer, List<String>> collectAllSameName = employeeList.stream().collect(
@@ -170,11 +186,13 @@ public class Java8example {
 		// 20. List down the name of all employee of each department.
 		Map<String, List<Employee>> collect16 = employeeList.stream()
 				.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.toList()));
-		
+		System.out.println("-----------------");
 		collect16.entrySet().forEach(entry -> {
 			System.out.println(entry.getKey() + "--> " + entry.getValue());
 		});
 		
+		Map<String, List<String>> map = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.mapping(Employee::getName, Collectors.toList())));
+		System.out.println("map-->" + map);
 		//1 Print the higest paid employee in each department 
 		System.out.println("-----Print the higest paid employee in each department ----");
 		Map<String, Optional<Employee>> collect19 = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
@@ -183,5 +201,8 @@ public class Java8example {
 		// Other ways using ollectors.reducing 
 		Map<String, Optional<Employee>> collectOtherways = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.reducing(BinaryOperator.maxBy(Comparator.comparingDouble(Employee::getSalary)))));
 		collectOtherways.entrySet().forEach(e->{System.out.println(e.getKey() +"--> "+ e.getValue().get());}); 
+	System.out.println(Stream.of("abc","abd").max((s1,s2)->s1.compareTo(s2)).filter(s->s.endsWith("d")).orElse("Y"));
+	
+	
 	}
 }

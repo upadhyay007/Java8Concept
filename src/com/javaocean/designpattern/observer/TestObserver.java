@@ -1,4 +1,4 @@
-package com.anurag.designpattern.pubsub;
+package com.javaocean.designpattern.observer;
 //under this concept from how to do in java.com
 public class TestObserver {
 	public static void main(String[] args) {

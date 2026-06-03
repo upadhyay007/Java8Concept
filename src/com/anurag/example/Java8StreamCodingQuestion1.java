@@ -1,5 +1,6 @@
 package com.anurag.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,9 +33,6 @@ public class Java8StreamCodingQuestion1 {
 		List<String> list = Arrays.asList("aabc", "aab", "aabwc", "aabc", "aabwcwer", "aabcsd");
 		List<String> collect2 = list.stream().filter(f -> f.length() > 6).collect(Collectors.toList());
 		System.out.println(" more than 6 digit " + collect2);
-		
-		
-		 
 		 
 		// How to collect 2 stream
 		List<Integer> list1 = Arrays.asList(1, 4, 6, 7);
@@ -57,9 +55,23 @@ public class Java8StreamCodingQuestion1 {
 		Set<Integer> set = new HashSet<Integer>();
 		List<Integer> duplicate = findDuplicate.stream().filter(i -> !set.add(i)).collect(Collectors.toList());// .forEach(System.out::prinln);
 		System.out.println("Duplicate list : " + duplicate);
-
 		
-		 
+		
+		
+		//Find 3rd higest number in arryList
+		int a[] = {2,3,4,5,6,7,8,9} ;		
+	    Integer integer = Arrays.stream(a).boxed().sorted(Collections.reverseOrder()).skip(2).findFirst().get();
+	    System.out.println("Third higest :  "+ integer);
+	    //or 
+	    Integer integer2 = IntStream.of(a).boxed().sorted(Collections.reverseOrder()).skip(2).findFirst().get();
+	    //or	    
+	    Integer integer3 = Arrays.stream(a).boxed().sorted(Collections.reverseOrder()).skip(2).findFirst().get();
+	   
+	    Integer collect3 = asList1.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList()).get(3);
+	    System.out.println(" collect3 -->  "+ collect3);
+	    // Find even number from arrays
+	    List<Integer> collect4 = Arrays.stream(a).boxed().filter(f->f%2==0).collect(Collectors.toList());
+	    System.out.println(collect4);
 
 	}
 }

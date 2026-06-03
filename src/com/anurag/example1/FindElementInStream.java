@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class FindElementInStream {
@@ -25,6 +26,9 @@ public class FindElementInStream {
 		Integer secondHigestInteger = arrayList.stream().sorted(Comparator.reverseOrder())
 				.skip(1).findFirst().get();
 		System.out.println("2nd Highest  : " + secondHigestInteger);
+		
+		Optional<Integer> findFirst = Arrays.stream(numbers).boxed().sorted(Comparator.reverseOrder()).skip(2).findFirst();
+		System.out.println("2nd higest : "+findFirst.get());
 		
 		
 		
